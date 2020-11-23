@@ -382,7 +382,7 @@ def draw_bboxes(
 
 def draw_bboxes_from_df(df, path_to_images_folder='images',figsize=(20,20)):
   '''Draws the first image in dataframe, with bboxes'''
-  assert ('left' in df.columns) & ('top' in df.columns) & ('width' in df.columns) & ('height' in df.columns),
+  assert ('left' in df.columns) & ('top' in df.columns) & ('width' in df.columns) & ('height' in df.columns), \
   "Dataframe must contain 'left', 'top', 'width', 'height' columns"
 
   bboxes = []
