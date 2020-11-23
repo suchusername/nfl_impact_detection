@@ -5,6 +5,7 @@ import os.path as osp
 import pandas as pd
 from matplotlib import colors as mp_colors
 from matplotlib import cm as mp_cm
+from matplotlib import pyplot as plt
 
 NAMING_CSV_PATH = "/NVI/cyclops/configs/naming.csv"
 
@@ -378,3 +379,25 @@ def draw_bboxes(
                         )
 
     return image
+
+def draw_bboxes_from_df(df, path_to_images_folder='images',figsize=(20,20)):
+  '''Draws the first image in dataframe, with bboxes'''
+  assert ('left' in df.columns) & ('top' in df.columns) & ('width' in df.columns) & ('height' in df.columns),
+  "Dataframe must contain 'left', 'top', 'width', 'height' columns"
+
+  bboxes = []
+  for loc_index in range(df.shape[0]):
+    sub_df = df.iloc[loc_index]
+    helmet_bbox = [sub_df['left'],
+              sub_df['top'],
+              sub_df['width'],
+              sub_df['height']]
+    bboxes.append(helmet_bbox)
+  bboxes = np.array(bboxes)
+
+  img_path = osp.join(path_to_images_folder,df['image'].values[0])
+  image = cv2.cvtColor(cv2.imread(img_path), cv2.COLOR_BGR2RGB)
+  bboxed_image = draw_bboxes(image,bboxes)
+
+  plt.figure(figsize=figsize)
+  plt.imshow(bboxed_image)
