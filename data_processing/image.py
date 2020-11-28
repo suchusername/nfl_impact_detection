@@ -50,7 +50,7 @@ class ResizeKeepRatio:
     """
     Resizes an image while preserving an aspect ratio.
     
-    Required keys: img (and bboxes)
+    Required keys: img, bboxes
     
     Arguments:
     h   : int, new height
@@ -65,7 +65,27 @@ class ResizeKeepRatio:
             raise ValueError("Invalid mode.")
         self.mode = mode
 
-    def process(self, img):
+    def resize_bboxes(self, bboxes, old_img_bbox, new_img_bbox):
+        """
+        Resize bboxes.
+        
+        Arguments:
+        bboxes      : np.array of shape (n,5), [x_min, y_min, width, height, label]
+        old_img_bbox: np.array of shape (4,), bbox of original image
+        new_img_bbox: np.array of shape (4,), bbox of resized image
+        
+        Returns:
+        np.array of shape (n,5), resized bboxes
+        """
+        resized_bboxes = np.zeros_like(bboxes)
+        valid_bboxes = bboxes[bboxes.sum(axis=1) > 0]
+        valid_bboxes[:, 0:2] -= old_img_bbox[0:2]
+        valid_bboxes[:, 0:4] *= np.tile(new_img_bbox[2:4] / old_img_bbox[2:4], 2)
+        valid_bboxes[:, 0:2] += new_img_bbox[0:2]
+        resized_bboxes[: len(valid_bboxes)] = valid_bboxes
+        return resized_bboxes
+
+    def process(self, img, bboxes):
         """
         Numpy processing.
         
@@ -79,14 +99,34 @@ class ResizeKeepRatio:
         scale = min(self.h / img.shape[0], self.w / img.shape[1])
         scaled = cv2.resize(img, None, fx=scale, fy=scale)
 
-        if self.mode == "topleft":
-            output[: scaled.shape[0], : scaled.shape[1]] = scaled
-        elif self.mode == "center":
-            cx = (output.shape[0] - scaled.shape[0]) // 2
-            cy = (output.shape[1] - scaled.shape[1]) // 2
-            output[cx : cx + scaled.shape[0], cy : cy + scaled.shape[1]] = scaled
+        n_bboxes = len(bboxes)
+        new_bboxes = np.zeros_like(bboxes)
 
-        return output
+        if self.mode == "topleft":
+            image_bbox = np.array([0, 0, scaled.shape[1], scaled.shape[0]])
+
+        elif self.mode == "center":
+            image_bbox = np.array(
+                [
+                    (output.shape[1] - scaled.shape[1]) // 2,
+                    (output.shape[0] - scaled.shape[0]) // 2,
+                    scaled.shape[1],
+                    scaled.shape[0],
+                ]
+            )
+
+        output[
+            image_bbox[1] : image_bbox[1] + image_bbox[3],
+            image_bbox[0] : image_bbox[0] + image_bbox[2],
+        ] = scaled
+
+        bboxes = self.resize_bboxes(
+            bboxes,
+            old_img_bbox=np.array([0, 0, img.shape[1], img.shape[0]]),
+            new_img_bbox=image_bbox,
+        )
+
+        return output, bboxes
 
     def __call__(self, sample):
         """
@@ -98,9 +138,9 @@ class ResizeKeepRatio:
         Returns:
         transformed sample
         """
-        sample["img"] = tf.numpy_function(self.process, [sample["img"]], [tf.float32])[
-            0
-        ]
+        sample["img"], sample["bboxes"] = tf.numpy_function(
+            self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32],
+        )
         return sample
 
 
