@@ -1,0 +1,26 @@
+model:
+  name: fcos
+  build: build
+  args:
+    input_h: 300
+    input_w: 400
+    l2_reg: 0.00001
+    dropout: 0
+    strides:
+      - 8
+    regression_weight: 0.05
+data:
+  train: training/temp_dataset.yaml
+  val: training/temp_dataset.yaml
+optimizer:
+  name: Adam
+  lr: 0.001
+callbacks:
+  lr_scheduler:
+    factor: 0.5
+    patience: 10
+    cooldown: 5
+  early_stop:
+    patience: 25
+epochs: 200
+batch_size: 4

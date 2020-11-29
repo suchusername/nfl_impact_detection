@@ -6,8 +6,10 @@ import fnmatch
 import warnings
 from collections import deque
 
-DATASETS_ROOT = ""
-MARKUP_ROOT = ""
+ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
+
+DATASETS_ROOT = ROOT_DIR
+MARKUP_ROOT = ROOT_DIR
 
 IMAGE_EXTS = [".jpg", ".JPG", ".jpeg", ".png", ".tif", ".tiff"]
 VIDEO_EXTS = [".avi", ".mp4", ".m4v", ".flv", ".MOV"]
