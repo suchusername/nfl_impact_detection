@@ -1,4 +1,4 @@
-import tenforflow as tf
+import tensorflow as tf
 import numpy as np
 import yaml
 import os.path as osp
