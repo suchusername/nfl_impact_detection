@@ -15,7 +15,7 @@ class Interpreter:
         """
         if isinstance(config, str):
             with open(config, "r") as f:
-                config = yaml.load(f, Loader=yaml.FullLoader)
+                config = yaml.safe_load(f)
         self._maxpool_count = config["maxpool_count"]
         self._confidence_threshold = config["confidence_threshold"]
         self._restore_size = config["restore_size"]
