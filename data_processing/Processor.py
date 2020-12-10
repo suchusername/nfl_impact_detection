@@ -37,7 +37,7 @@ def load_detection_ds(
         if isinstance(config, str):
             config_path = os.path.join(ROOT_DIR, config)
             with open(config_path, "r") as fd:
-                config = yaml.load(fd, Loader=yaml.FullLoader)
+                config = yaml.safe_load(fd)
     else:
         config = {"white_list": [images_dir]}
 
