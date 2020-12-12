@@ -7,6 +7,7 @@ import numpy as np
 import tensorflow as tf
 
 from .walk_directory import walk_directory
+from .io import load_gmc
 
 ROOT_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -31,6 +32,7 @@ def load_detection_ds(
     tf.data.Dataset with keys:
         img_path   : str, absolute path to image
         markup_path: str, absolute path to markup file
+        original_shape: list of integers, shape of original image
     """
 
     if config is not None:
@@ -44,7 +46,8 @@ def load_detection_ds(
     full_images_dir = osp.join(ROOT_DIR, images_dir)
     full_markup_dir = osp.join(ROOT_DIR, markup_dir)
 
-    ret = {"img_path": [], "markup_path": []}
+    ret = {"img_path": [], "markup_path": [],
+    "original_shape": []}#, "src_image_bbox": []}
 
     for img_path in walk_directory(config, mode="images"):
         markup_path = osp.join(
@@ -52,6 +55,10 @@ def load_detection_ds(
         )
         ret["img_path"].append(img_path)
         ret["markup_path"].append(markup_path)
+        ret['original_shape'].append([720,1280])
+
+        # markup = tf.convert_to_tensor(load_gmc(markup_path).astype(np.float32))
+        # ret['src_image_bbox'].append(markup)
 
     return tf.data.Dataset.from_tensor_slices(ret)
 

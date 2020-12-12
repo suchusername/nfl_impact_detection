@@ -126,7 +126,7 @@ class ResizeKeepRatio:
             new_img_bbox=image_bbox,
         )
 
-        return output, bboxes
+        return output, bboxes, np.array((0, 0, scaled.shape[1], scaled.shape[0]), dtype=np.float32)
 
     def __call__(self, sample):
         """
@@ -138,8 +138,8 @@ class ResizeKeepRatio:
         Returns:
         transformed sample
         """
-        sample["img"], sample["bboxes"] = tf.numpy_function(
-            self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32],
+        sample["img"], sample["bboxes"], sample["src_img_bbox"] = tf.numpy_function(
+            self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32, tf.float32],
         )
         return sample
 

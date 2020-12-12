@@ -36,6 +36,21 @@ class LoadBboxes:
         markup = load_gmc(markup_path, tags=self.tags, n_bboxes=self.n_bboxes)
         return markup.astype(np.float32)
 
+    def process_old_bboxes(self, markup_path, byte=True):
+        """
+        Numpy processing.
+        
+        Arguments:
+        markup_path: str or bytes, path to a markup file
+        
+        Returns:
+        np.array of shape (n_bboxes, 5) with bboxes [x_min, y_min, width, height, label]
+        """
+        if byte:
+            markup_path = markup_path.decode("utf-8")
+        markup = load_gmc(markup_path)
+        return markup.astype(np.float32)
+
     def __call__(self, sample):
         """
         Tensorflow processing.
@@ -49,6 +64,11 @@ class LoadBboxes:
         sample["bboxes"] = tf.numpy_function(
             self.process, [sample["markup_path"]], [tf.float32]
         )[0]
+
+        sample["src_img_bbox"] = tf.numpy_function(
+            self.process_old_bboxes, [sample["markup_path"]], [tf.float32]
+        )[0]
+
         return sample
 
 
