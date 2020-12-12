@@ -1,8 +1,10 @@
 import os
+import os.path as osp
 import json
 import tqdm
 import numpy as np
 import pandas as pd
+from .nms import filter_phantoms
 
 
 def numpy_json_converter(obj):
@@ -127,6 +129,64 @@ def load_gmc(markup_path, tags=["h"], n_bboxes=None, track_ids=False):
             raise ValueError(
                 f"Image has {bboxes_np.shape[0]} bboxes. Increase `n_bboxes`."
             )
+        placeholder = np.zeros((n_bboxes,) + bboxes_np.shape[1:], dtype=np.float32)
+        if bboxes_np.shape[0] > 0:
+            placeholder[: bboxes_np.shape[0]] = bboxes_np
+        return placeholder
+    else:
+        return bboxes_np
+
+
+def dump(json_path, bboxes):
+    with open(json_path, "w") as fd:
+        json.dump(bboxes.tolist(), fd)
+
+
+def serialize(img_paths, bboxes, img_path_prefix_to_cut, output_dir):
+    """
+    Serialize bboxes to file(s)
+
+    Parameters
+    ----------
+    img_paths : iterable
+      paths to images, on which the bboxes are detected
+      Used to create output path
+    
+    bboxes : numpy.ndarray
+      bboxes detected in the images
+      NOTE: mb with phantom bboxes
+    
+    img_path_prefix_to_cut : str
+      a common subpath of img_paths
+      in the output_dir, file osp.relpath(img_path, img_path_prefix_to_cut) + '.json'
+      would be created
+
+    output_dir : str      
+
+    """
+    for img_path, img_bboxes in zip(img_paths, bboxes):
+        try:
+            img_path = img_path.decode("utf-8")
+        except:
+            pass
+        img_name = osp.relpath(img_path, img_path_prefix_to_cut)
+        out_path = osp.join(output_dir, img_name + ".json")
+        os.makedirs(osp.dirname(out_path), exist_ok=True)
+
+        valid_bboxes = filter_phantoms(img_bboxes)
+        dump(out_path, valid_bboxes)
+
+
+
+def load_bbox(markup_path, n_bboxes=None):
+    with open(markup_path, "r") as fd:
+        bboxes = json.load(fd)
+    if len(bboxes) == 0:
+        bboxes_np = np.zeros((0, 6))
+    else:
+        bboxes_np = np.array(bboxes)
+
+    if n_bboxes is not None:
         placeholder = np.zeros((n_bboxes,) + bboxes_np.shape[1:], dtype=np.float32)
         if bboxes_np.shape[0] > 0:
             placeholder[: bboxes_np.shape[0]] = bboxes_np
