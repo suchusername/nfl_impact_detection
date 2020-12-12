@@ -119,6 +119,7 @@ def resize(bboxes, src_bboxes, original_shape, batch=True):
     if batch:
         src_bboxes = np.expand_dims(src_bboxes, axis=1)
         original_shape = np.expand_dims(original_shape, axis=1)
+        #print(original_shape, src_bboxes.shape, bboxes.shape)
         bboxes[:,:,0:2] -= src_bboxes[:,:,0:2]
         w_scale = original_shape[:,:,1:2] / src_bboxes[:,:,2:3]
         h_scale = original_shape[:,:,0:1] / src_bboxes[:,:,3:4]
