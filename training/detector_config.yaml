@@ -10,8 +10,8 @@ model:
       - 8
     regression_weight: 0.05
 data:
-  train: training/temp_dataset.yaml
-  val: training/temp_dataset.yaml
+  train: training/train_dataset.yaml
+  val: training/val_dataset.yaml
 optimizer:
   name: Adam
   lr: 0.001
