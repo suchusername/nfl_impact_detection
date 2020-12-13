@@ -104,6 +104,8 @@ class ResizeKeepRatio:
 
         if self.mode == "topleft":
             image_bbox = np.array([0, 0, scaled.shape[1], scaled.shape[0]])
+            delta_x = 0
+            delta_y = 0
 
         elif self.mode == "center":
             image_bbox = np.array(
@@ -114,6 +116,8 @@ class ResizeKeepRatio:
                     scaled.shape[0],
                 ]
             )
+            delta_x = (output.shape[1] - scaled.shape[1]) // 2
+            delta_y = (output.shape[0] - scaled.shape[0]) // 2
 
         output[
             image_bbox[1] : image_bbox[1] + image_bbox[3],
@@ -126,7 +130,8 @@ class ResizeKeepRatio:
             new_img_bbox=image_bbox,
         )
 
-        return output, bboxes, np.array((0, 0, scaled.shape[1], scaled.shape[0]), dtype=np.float32)
+        return output, bboxes, np.array((delta_x, delta_y, scaled.shape[1], scaled.shape[0]), dtype=np.float32)
+        # return output, bboxes, np.array((0, 0, scaled.shape[1], scaled.shape[0]), dtype=np.float32)
 
     def __call__(self, sample):
         """
