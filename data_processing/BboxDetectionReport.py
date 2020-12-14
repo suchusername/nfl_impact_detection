@@ -7,7 +7,7 @@ import warnings
 import json
 
 from .nms import IoU
-import io
+from .io import load_gmc, load_bbox
 
 from .walk_directory import walk_directory
 
@@ -90,16 +90,14 @@ class BboxDetectionReport:
         for pred_file_path in walk_directory(None, mode="markup", start_root=dir_pred):
             true_file_path = osp.join(dir_true, osp.relpath(pred_file_path, dir_pred))
             path_split = true_file_path.split("/")
-            if not path_split[-2].endswith(".marked_frames"):
-                path_split[-2] += ".marked_frames"
             true_file_path = "/".join(path_split)
             if not osp.exists(true_file_path):
                 continue
-            bboxes_true = io.load_gmc(
-                true_file_path, tags=["m", "h"], track_ids=track_ids
+            bboxes_true = load_gmc(
+                true_file_path, tags=["h"], track_ids=track_ids
             )
             bboxes_true = bboxes_true[bboxes_true[:, 4] == class_idx]
-            bboxes_pred = io.load_bbox(pred_file_path)
+            bboxes_pred = load_bbox(pred_file_path)
             bboxes_pred = bboxes_pred[bboxes_pred[:, 4] == class_idx]
 
             if self.verify_img_properties(
