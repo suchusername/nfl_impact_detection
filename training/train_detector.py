@@ -81,7 +81,7 @@ def main():
     os.makedirs(model_save_path, exist_ok=True)
 
     lr_scheduler = tf.keras.callbacks.ReduceLROnPlateau(
-        monitor="loss",
+        monitor="val_loss",
         factor=config["callbacks"]["lr_scheduler"]["factor"],
         patience=config["callbacks"]["lr_scheduler"]["patience"],
         cooldown=config["callbacks"]["lr_scheduler"]["cooldown"],
