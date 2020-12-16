@@ -350,10 +350,12 @@ class BboxDetectionReport:
     def run_standard_evaluation(self):
         self.match(0.5)
         return {
+            "precision_at_.3recall.5IoU": np.round(self.pfr(0.3), 3),
+            "precision_at_.5recall.5IoU": np.round(self.pfr(0.5), 3),
             "precision_at_.8recall.5IoU": np.round(self.pfr(0.8), 3),
             "precision_at_.9recall.5IoU": np.round(self.pfr(0.9), 3),
+            "recall_at_.3precision.5IoU": np.round(self.rfp(0.3), 3),
+            "recall_at_.5precision.5IoU": np.round(self.rfp(0.5), 3),
             "recall_at_.8precision.5IoU": np.round(self.rfp(0.8), 3),
-            "recall_at_.9precision.5IoU": np.round(self.rfp(0.9), 3),
-            # "AP_.5_1_at_.5IoU": np.round(self.ap([0.5, 1]), 3),
-            # "AR_.5_1_at_.5IoU": np.round(self.ar([0.5, 1]), 3),
+            "recall_at_.9precision.5IoU": np.round(self.rfp(0.9), 3)
         }
