@@ -1,0 +1,2 @@
+snapshot_id,idea,input_size,model,pfr@0.3,pfr@0.5,pfr@0.8,pfr@0.9,rfp@0.3,rfp@0.5,rfp@0.8,rfp@0.9
+e54187eb38901dbfca1ee4477a35280c,0.0,"(300, 400)",fcos_v0.py,0,0,0,0,0.183,0.12300000000000001,0.044000000000000004,0.02
