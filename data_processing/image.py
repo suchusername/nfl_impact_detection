@@ -2,6 +2,7 @@ import os
 import numpy as np
 import cv2
 import tensorflow as tf
+from .nms import filter_phantoms
 
 
 class LoadImage:
@@ -189,4 +190,35 @@ class Normalize:
         sample["img"] = tf.numpy_function(self.process, [sample["img"]], [tf.float32])[
             0
         ]
+        return sample
+
+class HFlip:
+    """
+    Random flip for image and bboxes
+    
+    Required keys: img, bboxes
+    """
+
+    def __init__(self):
+        pass
+
+    def process(self, img, bboxes):
+        # print(np.random.randint(2))
+        if np.random.randint(2) > 0: # 0.5 prob of flip
+            img = img[:, ::-1]
+            result = np.zeros_like(bboxes)
+            bboxes = filter_phantoms(bboxes)
+            bboxes[:, 0] = img.shape[1] - bboxes[:, 0] - bboxes[:, 2]
+            result[: len(bboxes)] = bboxes	
+            bboxes = result
+        
+        return img, bboxes
+
+    def __call__(self, sample):
+        
+        if "bboxes" in sample.keys():
+            sample["img"], sample["bboxes"] = tf.numpy_function(
+                self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32],
+            )
+
         return sample
