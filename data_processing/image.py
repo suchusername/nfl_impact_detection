@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import tensorflow as tf
 from .nms import filter_phantoms
+import random
 
 
 class LoadImage:
@@ -203,7 +204,6 @@ class HFlip:
         pass
 
     def process(self, img, bboxes):
-        # print(np.random.randint(2))
         if np.random.randint(2) > 0: # 0.5 prob of flip
             img = img[:, ::-1]
             result = np.zeros_like(bboxes)
@@ -216,9 +216,38 @@ class HFlip:
 
     def __call__(self, sample):
         
-        if "bboxes" in sample.keys():
-            sample["img"], sample["bboxes"] = tf.numpy_function(
-                self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32],
-            )
+        sample["img"], sample["bboxes"] = tf.numpy_function(
+            self.process, [sample["img"], sample["bboxes"]], [tf.float32, tf.float32],
+        )
+
+        return sample
+
+class Gamma:
+    """
+    Applying pixel**gamma for each pixel of image
+    
+    Arguments: (gamma_bottom, gamma_top) - tuple;
+
+    Parameter gamma regulates the strength of pixels adjustment.
+    For each sample in dataset it applies gamma correction with parameter
+    gamma from given distribution with boundaries (gamma_bottom, gamma_top).
+    """
+    
+    def __init__(self, gamma_bottom=0.5, gamma_top=1.5):
+        self.gamma_bottom = gamma_bottom
+        self.gamma_top = gamma_top
+
+    def process(self, img):
+        """
+        Picks gamma value from distribution and applies it to img
+        """
+        gamma = random.uniform(self.gamma_bottom, self.gamma_top)
+        return np.power(img, gamma)
+
+    def __call__(self, sample):
+
+        sample["img"] = tf.numpy_function(
+            self.process, [sample["img"]], [tf.float32]
+        )
 
         return sample
