@@ -227,7 +227,6 @@ class Gamma:
     Applying pixel**gamma for each pixel of image
     
     Arguments: (gamma_bottom, gamma_top) - tuple;
-
     Parameter gamma regulates the strength of pixels adjustment.
     For each sample in dataset it applies gamma correction with parameter
     gamma from given distribution with boundaries (gamma_bottom, gamma_top).
@@ -242,12 +241,12 @@ class Gamma:
         Picks gamma value from distribution and applies it to img
         """
         gamma = random.uniform(self.gamma_bottom, self.gamma_top)
-        return np.power(img, gamma)
+        return np.power(img.astype(np.float32), gamma)
 
     def __call__(self, sample):
-
-        sample["img"] = tf.numpy_function(
-            self.process, [sample["img"]], [tf.float32]
-        )
+        
+        sample["img"] = tf.numpy_function(self.process, [sample["img"]], [tf.float32])[
+            0
+        ]
 
         return sample
