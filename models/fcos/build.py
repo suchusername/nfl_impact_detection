@@ -66,8 +66,8 @@ def build_model(**kwargs):
 
     # Default arguments
     kwargs["num_classes"] = kwargs.get("num_classes", 1)
-    kwargs["input_h"] = kwargs.get("input_h", 300)
-    kwargs["input_w"] = kwargs.get("input_w", 400)
+    kwargs["input_h"] = kwargs.get("input_h", 592)
+    kwargs["input_w"] = kwargs.get("input_w", 800)
     kwargs["l2_reg"] = kwargs.get("l2_reg", 0.001)
     kwargs["dropout"] = kwargs.get("dropout", 0.1)
 
@@ -85,33 +85,26 @@ def build_model(**kwargs):
 
     # Backbone: residual feature extraction
 
-    """
-    x = ConvBlock(64, **reg)(img_input)
-    x = ResidualBlock(64, **reg)(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-
-    x = ConvBlock(128, **reg)(x)
-    x = ResidualBlock(128, **reg)(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-
-    x = ConvBlock(256, **reg)(x)
-    x = ResidualBlock(256, **reg)(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-
-    x = ConvBlock(256, **reg)(x)
-    feature_map = ConvBlock(256, **reg)(x)
-    """
-
-    x = tf.keras.layers.Conv2D(16, (3, 3), padding="same", activation="relu", **reg)(
+    x = tf.keras.layers.Conv2D(32, (3, 3), padding="same", activation="relu", **reg)(
         img_input
     )
+    x = ResidualBlock(32)(x)
     x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-    x = tf.keras.layers.Conv2D(32, (3, 3), padding="same", activation="relu", **reg)(x)
-    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+
     x = tf.keras.layers.Conv2D(64, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = ResidualBlock(64)(x)
     x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+    
+    x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = ResidualBlock(128)(x)
+    x = tf.keras.layers.MaxPooling2D((2, 2))(x)
+
+    x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
+    
+
     feature_map = tf.keras.layers.Conv2D(
-        64, (3, 3), padding="same", activation="relu", **reg
+        128, (3, 3), padding="same", activation="relu", **reg
     )(x)
 
     # Head: detection (classification) branch
@@ -165,8 +158,8 @@ def build_processor(**kwargs):
     # Default arguments
     kwargs["num_classes"] = kwargs.get("num_classes", 1)
     kwargs["n_bboxes"] = kwargs.get("n_bboxes", 80)
-    kwargs["input_h"] = kwargs.get("input_h", 300)
-    kwargs["input_w"] = kwargs.get("input_w", 400)
+    kwargs["input_h"] = kwargs.get("input_h", 592)
+    kwargs["input_w"] = kwargs.get("input_w", 800)
     kwargs["strides"] = kwargs.get("strides", [8])
 
     transformations = [
@@ -174,6 +167,31 @@ def build_processor(**kwargs):
         bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
         image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
         image.Normalize(),
+        bboxes.BuildFCOSTarget(
+            (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"]
+        ),
+    ]
+
+    processor = Processor(transformations, feature_keys=["img"], label_keys=["target0"])
+
+    return processor
+
+def build_train_processor(**kwargs):
+
+    # Default arguments
+    kwargs["num_classes"] = kwargs.get("num_classes", 1)
+    kwargs["n_bboxes"] = kwargs.get("n_bboxes", 80)
+    kwargs["input_h"] = kwargs.get("input_h", 592)
+    kwargs["input_w"] = kwargs.get("input_w", 800)
+    kwargs["strides"] = kwargs.get("strides", [8])
+
+    transformations = [
+        image.LoadImage(),
+        bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
+        image.HFlip(),
+        image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
+        image.Normalize(),
+        image.Gamma(0.5, 1.5),
         bboxes.BuildFCOSTarget(
             (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"]
         ),

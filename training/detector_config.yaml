@@ -2,13 +2,19 @@ model:
   name: fcos
   build: build
   args:
-    input_h: 300
-    input_w: 400
+    input_h: 592
+    input_w: 800
     l2_reg: 0.00001
     dropout: 0
     strides:
       - 8
     regression_weight: 0.05
+heads_names:
+    - concatenate
+    - concatenate1
+ext_keys:
+    - img
+    - target0
 data:
   train: training/train_dataset.yaml
   val: training/val_dataset.yaml
@@ -23,4 +29,4 @@ callbacks:
   early_stop:
     patience: 25
 epochs: 200
-batch_size: 4
+batch_size: 8
