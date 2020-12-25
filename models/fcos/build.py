@@ -7,26 +7,6 @@ from data_processing import image, bboxes
 from models.fcos.loss import fcos_detection_loss, fcos_regression_loss
 
 
-class ConvBlock(tf.keras.Model):
-    def __init__(self, filters, kernel_size=(3, 3), dropout=0, **reg):
-
-        super(ConvBlock, self).__init__(name="")
-
-        self.conv = tf.keras.layers.Conv2D(
-            filters, kernel_size=kernel_size, padding="same", activation=None, **reg,
-        )
-        self.act = tf.keras.layers.Activation("relu")
-        self.bn = tf.keras.layers.BatchNormalization()
-        self.dropout = tf.keras.layers.Dropout(dropout)
-
-    def call(self, inp, training=False):
-        x = self.conv(inp)
-        x = self.act(x)
-        x = self.bn(x, training=training)
-        x = self.dropout(x, training=training)
-        return x
-
-
 class ResidualBlock(tf.keras.Model):
     def __init__(self, filters, kernel_size=(3, 3), dropout=0, **reg):
 
@@ -66,12 +46,11 @@ def build_model(**kwargs):
 
     # Default arguments
     kwargs["num_classes"] = kwargs.get("num_classes", 1)
-    kwargs["input_h"] = kwargs.get("input_h", 592)
-    kwargs["input_w"] = kwargs.get("input_w", 800)
+    kwargs["input_h"] = kwargs.get("input_h", 296)
+    kwargs["input_w"] = kwargs.get("input_w", 400)
     kwargs["l2_reg"] = kwargs.get("l2_reg", 0.001)
     kwargs["dropout"] = kwargs.get("dropout", 0.1)
 
-    p = kwargs["dropout"]
     reg = {
         "kernel_regularizer": tf.keras.regularizers.l2(kwargs["l2_reg"]),
         "bias_regularizer": tf.keras.regularizers.l2(kwargs["l2_reg"]),
@@ -88,20 +67,29 @@ def build_model(**kwargs):
     x = tf.keras.layers.Conv2D(32, (3, 3), padding="same", activation="relu", **reg)(
         img_input
     )
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Dropout(kwargs["dropout"])(x)
     x = ResidualBlock(32)(x)
     x = tf.keras.layers.MaxPooling2D((2, 2))(x)
 
     x = tf.keras.layers.Conv2D(64, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Dropout(kwargs["dropout"])(x)
     x = ResidualBlock(64)(x)
     x = tf.keras.layers.MaxPooling2D((2, 2))(x)
-    
+
     x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Dropout(kwargs["dropout"])(x)
     x = ResidualBlock(128)(x)
     x = tf.keras.layers.MaxPooling2D((2, 2))(x)
 
     x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Dropout(kwargs["dropout"])(x)
     x = tf.keras.layers.Conv2D(128, (3, 3), padding="same", activation="relu", **reg)(x)
-    
+    x = tf.keras.layers.BatchNormalization()(x)
+    x = tf.keras.layers.Dropout(kwargs["dropout"])(x)
 
     feature_map = tf.keras.layers.Conv2D(
         128, (3, 3), padding="same", activation="relu", **reg
@@ -153,18 +141,19 @@ def build_metrics(**kwargs):
     return [loss, fcos_detection_loss, fcos_regression_loss]
 
 
-def build_processor(**kwargs):
+def build_train_processor(**kwargs):
 
     # Default arguments
     kwargs["num_classes"] = kwargs.get("num_classes", 1)
     kwargs["n_bboxes"] = kwargs.get("n_bboxes", 80)
-    kwargs["input_h"] = kwargs.get("input_h", 592)
-    kwargs["input_w"] = kwargs.get("input_w", 800)
+    kwargs["input_h"] = kwargs.get("input_h", 296)
+    kwargs["input_w"] = kwargs.get("input_w", 400)
     kwargs["strides"] = kwargs.get("strides", [8])
 
     transformations = [
         image.LoadImage(),
         bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
+        image.HFlip(),
         image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
         image.Normalize(),
         bboxes.BuildFCOSTarget(
@@ -176,22 +165,21 @@ def build_processor(**kwargs):
 
     return processor
 
-def build_train_processor(**kwargs):
+
+def build_processor(**kwargs):
 
     # Default arguments
     kwargs["num_classes"] = kwargs.get("num_classes", 1)
     kwargs["n_bboxes"] = kwargs.get("n_bboxes", 80)
-    kwargs["input_h"] = kwargs.get("input_h", 592)
-    kwargs["input_w"] = kwargs.get("input_w", 800)
+    kwargs["input_h"] = kwargs.get("input_h", 296)
+    kwargs["input_w"] = kwargs.get("input_w", 400)
     kwargs["strides"] = kwargs.get("strides", [8])
 
     transformations = [
         image.LoadImage(),
         bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
-        image.HFlip(),
         image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
         image.Normalize(),
-        image.Gamma(0.5, 1.5),
         bboxes.BuildFCOSTarget(
             (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"]
         ),
