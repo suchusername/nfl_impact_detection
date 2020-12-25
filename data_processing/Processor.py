@@ -62,6 +62,56 @@ def load_detection_ds(
 
     return tf.data.Dataset.from_tensor_slices(ret)
 
+def load_detection_ds_kaggle(
+    config=None,
+    images_dir="data/images",
+    markup_dir="data/images_markup",
+    n_bboxes=None,
+):
+    """
+    Load raw dataset for helmet detection.
+    
+    Arguments:
+    config    : dict or str, path to yaml-config file
+        That file should have entries like "data/images/58029_003901_Endzone_frame382.jpg"
+    images_dir: str, path to directory with images relative to root of project
+    markup_dir: str, path to directory with markup relative to root of project
+    n_bboxes  : int, length of bboxes array for each sample (to make every sample have the same shape)
+    
+    Returns:
+    tf.data.Dataset with keys:
+        img_path   : str, absolute path to image
+        markup_path: str, absolute path to markup file
+        original_shape: list of integers, shape of original image
+    """
+
+    if config is not None:
+        if isinstance(config, str):
+            config_path = os.path.join(ROOT_DIR, config)
+            with open(config_path, "r") as fd:
+                config = yaml.safe_load(fd)
+    else:
+        config = {"white_list": [images_dir]}
+
+    full_images_dir = osp.join(ROOT_DIR, images_dir)
+    full_markup_dir = osp.join(ROOT_DIR, markup_dir)
+
+    ret = {"img_path": [], "markup_path": [],
+    "original_shape": []}#, "src_image_bbox": []}
+
+    for img_path in walk_directory(config, mode="images"):
+        markup_path = osp.join(
+            full_markup_dir, osp.relpath(img_path, full_images_dir) + ".json"
+        )
+        ret["img_path"].append(img_path.replace('images','images_markup') + ".json")
+        ret["markup_path"].append(markup_path)
+        ret['original_shape'].append([720,1280])
+
+        # markup = tf.convert_to_tensor(load_gmc(markup_path).astype(np.float32))
+        # ret['src_image_bbox'].append(markup)
+
+    return tf.data.Dataset.from_tensor_slices(ret)
+
 
 class Processor:
     """
