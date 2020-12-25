@@ -1,0 +1,160 @@
+{
+    "objects": [
+        {
+            "data": [
+                751,
+                191,
+                25,
+                25
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                326,
+                705,
+                29,
+                15
+            ],
+            "tags": [
+                "h",
+                "Helmet-Partial"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                532,
+                221,
+                31,
+                33
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                482,
+                225,
+                28,
+                32
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                426,
+                214,
+                23,
+                31
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                422,
+                242,
+                25,
+                24
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                181,
+                449,
+                23,
+                27
+            ],
+            "tags": [
+                "h",
+                "Helmet-Partial"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                791,
+                186,
+                28,
+                29
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                959,
+                153,
+                29,
+                31
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                970,
+                437,
+                32,
+                29
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                647,
+                226,
+                25,
+                27
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                645,
+                128,
+                28,
+                27
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        }
+    ]
+}

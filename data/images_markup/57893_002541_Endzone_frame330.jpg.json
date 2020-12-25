@@ -1,0 +1,30 @@
+{
+    "objects": [
+        {
+            "data": [
+                365,
+                117,
+                28,
+                31
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                905,
+                331,
+                30,
+                34
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        }
+    ]
+}

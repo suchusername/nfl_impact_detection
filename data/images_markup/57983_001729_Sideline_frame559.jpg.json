@@ -1,0 +1,108 @@
+{
+    "objects": [
+        {
+            "data": [
+                734,
+                195,
+                21,
+                22
+            ],
+            "tags": [
+                "h",
+                "Helmet-Blurred"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                744,
+                207,
+                24,
+                23
+            ],
+            "tags": [
+                "h",
+                "Helmet-Blurred"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                0,
+                235,
+                21,
+                37
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                80,
+                264,
+                32,
+                29
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                174,
+                266,
+                31,
+                32
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                2,
+                274,
+                23,
+                26
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                255,
+                148,
+                22,
+                20
+            ],
+            "tags": [
+                "h",
+                "Helmet-Blurred"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                519,
+                184,
+                22,
+                29
+            ],
+            "tags": [
+                "h",
+                "Helmet-Sideline"
+            ],
+            "type": "rect"
+        }
+    ]
+}

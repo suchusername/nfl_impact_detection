@@ -1,0 +1,30 @@
+{
+    "objects": [
+        {
+            "data": [
+                554,
+                223,
+                31,
+                17
+            ],
+            "tags": [
+                "h",
+                "Helmet-Partial"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                538,
+                160,
+                38,
+                33
+            ],
+            "tags": [
+                "h",
+                "Helmet"
+            ],
+            "type": "rect"
+        }
+    ]
+}

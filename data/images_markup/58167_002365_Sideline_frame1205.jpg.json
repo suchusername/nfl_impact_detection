@@ -1,0 +1,30 @@
+{
+    "objects": [
+        {
+            "data": [
+                1155,
+                452,
+                38,
+                27
+            ],
+            "tags": [
+                "h",
+                "Helmet-Blurred"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                860,
+                663,
+                31,
+                32
+            ],
+            "tags": [
+                "h",
+                "Helmet-Blurred"
+            ],
+            "type": "rect"
+        }
+    ]
+}
