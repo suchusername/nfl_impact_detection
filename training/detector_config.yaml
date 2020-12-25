@@ -5,7 +5,7 @@ model:
     input_h: 592
     input_w: 800
     l2_reg: 0.00001
-    dropout: 0
+    dropout: 0.1
     strides:
       - 8
     regression_weight: 0.05
