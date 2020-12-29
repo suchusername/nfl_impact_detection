@@ -152,12 +152,12 @@ def build_train_processor(**kwargs):
 
     transformations = [
         image.LoadImage(),
-        bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
+        bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"], tags=['h','impact']),
         image.HFlip(),
         image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
         image.Normalize(),
         bboxes.BuildFCOSTarget(
-            (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"]
+            (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"], 2
         ),
     ]
 
@@ -177,11 +177,11 @@ def build_processor(**kwargs):
 
     transformations = [
         image.LoadImage(),
-        bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"]),
+        bboxes.LoadBboxes(n_bboxes=kwargs["n_bboxes"], tags=['h','impact']),
         image.ResizeKeepRatio(kwargs["input_h"], kwargs["input_w"]),
         image.Normalize(),
         bboxes.BuildFCOSTarget(
-            (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"]
+            (kwargs["input_h"], kwargs["input_w"]), kwargs["strides"], 2
         ),
     ]
 
