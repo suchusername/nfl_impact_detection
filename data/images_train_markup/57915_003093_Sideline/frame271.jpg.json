@@ -1,0 +1,368 @@
+{
+    "objects": [
+        {
+            "data": [
+                870,
+                290,
+                15,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                203,
+                606,
+                15,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                617,
+                298,
+                13,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                775,
+                282,
+                13,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                668,
+                293,
+                14,
+                12
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                826,
+                274,
+                12,
+                11
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                444,
+                570,
+                13,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                380,
+                616,
+                15,
+                16
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                433,
+                616,
+                14,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                450,
+                606,
+                15,
+                12
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                400,
+                577,
+                14,
+                16
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                759,
+                225,
+                10,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                294,
+                598,
+                15,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                663,
+                412,
+                12,
+                12
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                324,
+                597,
+                15,
+                14
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                221,
+                141,
+                13,
+                14
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                839,
+                268,
+                14,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                605,
+                340,
+                13,
+                13
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                825,
+                264,
+                10,
+                18
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                868,
+                358,
+                12,
+                13
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                749,
+                316,
+                9,
+                8
+            ],
+            "tags": [
+                "h",
+                "impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                650,
+                263,
+                13,
+                14
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                416,
+                424,
+                12,
+                11
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                780,
+                242,
+                8,
+                9
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                867,
+                331,
+                11,
+                10
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                704,
+                322,
+                14,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                658,
+                428,
+                7,
+                7
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                743,
+                303,
+                12,
+                13
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}

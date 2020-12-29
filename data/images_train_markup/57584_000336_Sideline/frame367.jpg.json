@@ -1,0 +1,82 @@
+{
+    "objects": [
+        {
+            "data": [
+                1216,
+                123,
+                27,
+                25
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                856,
+                148,
+                16,
+                11
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                628,
+                263,
+                25,
+                27
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                613,
+                301,
+                21,
+                19
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                849,
+                619,
+                26,
+                27
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1263,
+                144,
+                17,
+                24
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}

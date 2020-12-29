@@ -1,0 +1,69 @@
+{
+    "objects": [
+        {
+            "data": [
+                599,
+                355,
+                24,
+                27
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1272,
+                421,
+                8,
+                14
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                854,
+                112,
+                26,
+                33
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                526,
+                198,
+                26,
+                32
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                530,
+                414,
+                31,
+                29
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}

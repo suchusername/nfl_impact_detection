@@ -1,0 +1,225 @@
+{
+    "objects": [
+        {
+            "data": [
+                756,
+                158,
+                22,
+                29
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                199,
+                258,
+                25,
+                29
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                607,
+                176,
+                3,
+                20
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                98,
+                340,
+                28,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                462,
+                369,
+                25,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                698,
+                197,
+                23,
+                22
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                702,
+                275,
+                24,
+                21
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1229,
+                241,
+                21,
+                15
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1005,
+                320,
+                26,
+                23
+            ],
+            "tags": [
+                "h",
+                "impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                609,
+                176,
+                23,
+                22
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                332,
+                269,
+                27,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                292,
+                296,
+                23,
+                22
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                272,
+                291,
+                23,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1233,
+                218,
+                28,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                742,
+                270,
+                21,
+                33
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                678,
+                350,
+                25,
+                26
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1020,
+                309,
+                25,
+                29
+            ],
+            "tags": [
+                "h",
+                "impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}

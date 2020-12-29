@@ -1,0 +1,108 @@
+{
+    "objects": [
+        {
+            "data": [
+                600,
+                324,
+                28,
+                40
+            ],
+            "tags": [
+                "h",
+                "impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                1257,
+                29,
+                22,
+                45
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                637,
+                284,
+                18,
+                10
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                880,
+                132,
+                40,
+                44
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                775,
+                333,
+                34,
+                23
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                653,
+                258,
+                33,
+                28
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                649,
+                233,
+                30,
+                34
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                997,
+                317,
+                42,
+                39
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}

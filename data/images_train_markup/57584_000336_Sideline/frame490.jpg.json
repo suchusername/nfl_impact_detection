@@ -1,0 +1,30 @@
+{
+    "objects": [
+        {
+            "data": [
+                514,
+                216,
+                37,
+                33
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        },
+        {
+            "data": [
+                816,
+                325,
+                40,
+                36
+            ],
+            "tags": [
+                "h",
+                "not_impact"
+            ],
+            "type": "rect"
+        }
+    ]
+}
